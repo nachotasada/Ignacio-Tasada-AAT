@@ -1,0 +1,54 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ej_3
+{
+    public class Amateur : Jugador
+    {
+        public int tiempoRestante = 20;
+        public bool estaCansado = false;
+
+        public bool correr(int minutos)
+        {
+            if (estaCansado)
+            {
+                Console.WriteLine("El amateur está cansado, debe descansar.");
+                return false;
+            }
+
+            if (minutos <= tiempoRestante)
+            {
+                tiempoRestante -= minutos;
+                if (tiempoRestante == 0)
+                {
+                    estaCansado = true;
+                }
+                return true;
+            }
+            else
+            {
+                tiempoRestante = 0;
+                estaCansado = true;
+                return false;
+            }
+        }
+
+        public bool cansado()
+        {
+            return estaCansado;
+        }
+
+        public void descansar(int minutos)
+        {
+            tiempoRestante += minutos;
+            if (tiempoRestante > 20)
+            {
+                tiempoRestante = 20;
+            }
+            estaCansado = false;
+        }
+    }
+}
